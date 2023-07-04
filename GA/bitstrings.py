@@ -18,12 +18,6 @@ class BitstringGA(GA):
     def calculate_fitness(self, bitstring, **kwargs):
         return sum(bitstring)
 
-    # Function to perform mutation on a bitstring
-    def mutate(self, bitstring, mutation_rate, **kwargs):
-        for i in range(len(bitstring)):
-            if random.random() < mutation_rate:
-                bitstring[i] = random.choice([0, 1])
-
 if __name__ == "__main__":
     # Run the genetic algorithm
     ga_runner = BitstringGA()

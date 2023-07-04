@@ -25,6 +25,12 @@ class GA:
         parent2 = random.choice(population)
         return parent1, parent2
 
+    # Function to perform mutation on a bitstring
+    def mutate(self, bitstring, mutation_rate):
+        for i in range(len(bitstring)):
+            if random.random() < mutation_rate:
+                bitstring[i] = random.choice([0, 1])
+
     # Genetic Algorithm
     def genetic_algorithm(self, generations, population_size, mutation_rate, success_score=None, print_res=False, **kwargs):
         # Create initial population
