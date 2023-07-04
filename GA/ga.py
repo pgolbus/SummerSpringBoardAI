@@ -40,11 +40,15 @@ class GA:
             fitness_scores = [self.calculate_fitness(individual, **kwargs) for individual in population]
 
             best_score = max(fitness_scores)
-            max_score = max(max_score, best_score)
-            best_scores.append(best_score)
-            best = population[fitness_scores.index(best_score)]
+            if best_score > max_score:
+                max_score = best_score
+            else:
+                population = old_population
+                fitness_scores = [self.calculate_fitness(individual, **kwargs) for individual in population]
+            best_scores.append(max_score)
+            best = population[fitness_scores.index(max_score)]
             if print_res:
-                print(f"Generation {generation + 1}: {best} {best_score}")
+                print(f"Generation {generation + 1}: {best} {max_score}")
 
             # Check if a solution is found
             if success_score is not None and success_score in fitness_scores:
@@ -57,11 +61,12 @@ class GA:
             for _ in range(population_size // 2):
                 parent1, parent2 = self.select_parents(population)
                 child1, child2 = self.crossover(parent1, parent2)
-                self.mutate(child1, mutation_rate, **kwargs)
-                self.mutate(child2, mutation_rate, **kwargs)
+                self.mutate(child1, mutation_rate)
+                self.mutate(child2, mutation_rate)
                 new_population.append(child1)
                 new_population.append(child2)
 
+            old_population = population
             population = new_population
 
         if print_res:
