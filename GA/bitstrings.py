@@ -31,5 +31,5 @@ def crossover(parent1, parent2):
 
 if __name__ == "__main__":
     # Run the genetic algorithm
-    ga_runner = GA(generate_bitstring, calculate_fitness, crossover, mutate_bitstring, )
+    ga_runner = GA(generate_bitstring, calculate_fitness, crossover, mutate_bitstring)
     print(ga_runner.genetic_algorithm(GENERATIONS, POPULATION_SIZE, MUTATION_RATE, LENGTH, True))
