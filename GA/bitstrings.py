@@ -24,14 +24,7 @@ class BitstringGA(GA):
             if random.random() < mutation_rate:
                 bitstring[i] = random.choice([0, 1])
 
-    # Function to perform crossover between two parent bitstrings
-    def crossover(self, parent1, parent2, **kwargs):
-        crossover_point = random.randint(1, len(parent1) - 1)
-        child1 = parent1[:crossover_point] + parent2[crossover_point:]
-        child2 = parent2[:crossover_point] + parent1[crossover_point:]
-        return child1, child2
-
 if __name__ == "__main__":
     # Run the genetic algorithm
     ga_runner = BitstringGA()
-    print(ga_runner.genetic_algorithm(GENERATIONS, POPULATION_SIZE, MUTATION_RATE, LENGTH, print_res=True, length=LENGTH))
+    print(ga_runner.genetic_algorithm(GENERATIONS, POPULATION_SIZE, MUTATION_RATE, success_score=LENGTH, print_res=True, length=LENGTH))

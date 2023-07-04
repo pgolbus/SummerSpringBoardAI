@@ -9,11 +9,15 @@ class GA:
     def calculate_fitness(self, **kwargs):
         pass
 
-    def crossover(self, **kwargs):
-        pass
-
     def mutate(self, **kwargs):
         pass
+
+    # Function to perform crossover between two parent bitstrings
+    def crossover(self, parent1, parent2):
+        crossover_point = random.randint(1, len(parent1) - 1)
+        child1 = parent1[:crossover_point] + parent2[crossover_point:]
+        child2 = parent2[:crossover_point] + parent1[crossover_point:]
+        return child1, child2
 
     # Function to select parents for reproduction using tournament selection
     def select_parents(self, population):
@@ -22,7 +26,7 @@ class GA:
         return parent1, parent2
 
     # Genetic Algorithm
-    def genetic_algorithm(self, generations, population_size, mutation_rate, success_score, print_res=False, **kwargs):
+    def genetic_algorithm(self, generations, population_size, mutation_rate, success_score=None, print_res=False, **kwargs):
         # Create initial population
         population = [self.generate(**kwargs) for _ in range(population_size)]
         max_score = float("-inf")
@@ -40,7 +44,7 @@ class GA:
                 print(f"Generation {generation + 1}: {best} {best_score}")
 
             # Check if a solution is found
-            if success_score in fitness_scores:
+            if success_score is not None and success_score in fitness_scores:
                 if print_res:
                     print("Solution found in generation", generation)
                 return best_scores
@@ -49,7 +53,7 @@ class GA:
             new_population = []
             for _ in range(population_size // 2):
                 parent1, parent2 = self.select_parents(population)
-                child1, child2 = self.crossover(parent1, parent2, **kwargs)
+                child1, child2 = self.crossover(parent1, parent2)
                 self.mutate(child1, mutation_rate, **kwargs)
                 self.mutate(child2, mutation_rate, **kwargs)
                 new_population.append(child1)
@@ -58,5 +62,8 @@ class GA:
             population = new_population
 
         if print_res:
-            print(f"Solution not found. Max score: {max_score}")
+            if success_score is not None:
+                print(f"Solution not found. Max score: {max_score}")
+            else:
+                print(f"Max score: {max_score}")
         return best_scores
