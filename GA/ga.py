@@ -42,6 +42,7 @@ class GA:
             fitness_scores = [self.calculate_fitness(individual, **kwargs) for individual in population]
 
             best_score = max(fitness_scores)
+            # if the score went down, we want to keep the old population
             if best_score > max_score:
                 max_score = best_score
             else:
@@ -59,6 +60,8 @@ class GA:
 
             # Create a new population through selection, crossover, and mutation
             new_population = []
+            # we're going to select two individuals once per half the size the of the population
+            # the strongest are most likely to breed or just move on to the next generation
             for _ in range(population_size // 2):
                 parent1, parent2 = self.select_parents(population, fitness_scores)
                 child1, child2 = self.crossover(parent1, parent2, crossover_rate)
