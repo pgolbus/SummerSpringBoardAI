@@ -3,11 +3,17 @@ import random
 
 class GA:
 
-    def __init__(self, generate, calculate_fitness, crossover, mutate):
-        self.generate = generate
-        self.calculate_fitness = calculate_fitness
-        self.crossover = crossover
-        self.mutate = mutate
+    def generate(self):
+        pass
+
+    def calculate_fitness(self):
+        pass
+
+    def crossover(self):
+        pass
+
+    def mutate(self):
+        pass
 
     # Function to select parents for reproduction using tournament selection
     def select_parents(self, population):
