@@ -3,19 +3,21 @@ import random
 from ga import GA
 
 # Genetic Algorithm parameters
-POPULATION_SIZE = 100
+POPULATION_SIZE = 10
 MUTATION_RATE = 0.01
-GENERATIONS = 1000
+GENERATIONS = 100
+CROSSOVER_RATE = 0.7
+
 MAX_WEIGHT = 15
 
-# List of items [weight, value]
-KNAPSACK = [
-    [2, 6],
-    [2, 10],
-    [3, 12],
-    [4, 15],
-    [5, 16]
-]
+
+def generate_knapsack(size=100, minweight=1, maxweight=10, minvalue=9, maxvalue=99):
+    knapsack = []
+    for _ in range(size):
+        weight = random.randint(minweight, maxweight)
+        value = random.randint(minvalue, maxvalue)
+        knapsack.append((weight, value))
+    return knapsack
 
 class KnapsackGA(GA):
 
@@ -38,13 +40,8 @@ class KnapsackGA(GA):
             total_value = 0  # Penalize solutions exceeding the weight limit
         return total_value        
 
-    # Function to perform mutation on a bitstring
-    def mutate(self, bitstring, mutation_rate, **kwargs):
-        for i in range(len(bitstring)):
-            if random.random() < mutation_rate:
-                bitstring[i] = random.choice([0, 1])
-
 if __name__ == "__main__":
-    # Run the genetic algorithm= 
-    ga_runner = KnapsackGA(KNAPSACK)
-    print(ga_runner.genetic_algorithm(GENERATIONS, POPULATION_SIZE, MUTATION_RATE, max_weight=MAX_WEIGHT, print_res=True))
+    knapsack = generate_knapsack(10)
+    print(knapsack)
+    ga_runner = KnapsackGA(knapsack)
+    ga_runner.genetic_algorithm(GENERATIONS, POPULATION_SIZE, MUTATION_RATE, CROSSOVER_RATE, max_weight=MAX_WEIGHT, print_res=True)
