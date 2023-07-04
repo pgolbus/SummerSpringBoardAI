@@ -31,7 +31,7 @@ class GA:
                 bitstring[i] = random.choice([0, 1])
 
     # Genetic Algorithm
-    def genetic_algorithm(self, generations, population_size, mutation_rate, crossover_rate, success_score=None, print_res=False, **kwargs):
+    def select(self, generations, population_size, mutation_rate, crossover_rate, success_score=None, print_res=False, **kwargs):
         # Create initial population
         population = [self.generate(**kwargs) for _ in range(population_size)]
         max_score = float("-inf")
