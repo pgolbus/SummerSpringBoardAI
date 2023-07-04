@@ -9,6 +9,11 @@ rules = [
         "then": "Street Fighter 2",
         "explanation": "If you're into fighters, you have to check out the original."
     },
+    {
+        "if": "Street Fighter 2",
+        "then": "fighters",
+        "explanation": "Careful. I'm here to cause an infinite loop. Why will I cause an inifinite loop?)"
+    },
 ]
 
 class InferenceEngine:
