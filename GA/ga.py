@@ -3,16 +3,16 @@ import random
 
 class GA:
 
-    def generate(self):
+    def generate(self, **kwargs):
         pass
 
-    def calculate_fitness(self):
+    def calculate_fitness(self, **kwargs):
         pass
 
-    def crossover(self):
+    def crossover(self, **kwargs):
         pass
 
-    def mutate(self):
+    def mutate(self, **kwargs):
         pass
 
     # Function to select parents for reproduction using tournament selection
@@ -22,15 +22,15 @@ class GA:
         return parent1, parent2
 
     # Genetic Algorithm
-    def genetic_algorithm(self, generations, population_size, mutation_rate, length, print_res = False):
+    def genetic_algorithm(self, generations, population_size, mutation_rate, success_score, print_res=False, **kwargs):
         # Create initial population
-        population = [self.generate(length) for _ in range(population_size)]
+        population = [self.generate(**kwargs) for _ in range(population_size)]
         max_score = float("-inf")
         best_scores = []
 
         for generation in range(generations):
             # Calculate fitness for each individual in the population
-            fitness_scores = [self.calculate_fitness(individual) for individual in population]
+            fitness_scores = [self.calculate_fitness(individual, **kwargs) for individual in population]
 
             best_score = max(fitness_scores)
             max_score = max(max_score, best_score)
@@ -40,7 +40,7 @@ class GA:
                 print(f"Generation {generation + 1}: {best} {best_score}")
 
             # Check if a solution is found
-            if length in fitness_scores:
+            if success_score in fitness_scores:
                 if print_res:
                     print("Solution found in generation", generation)
                 return best_scores
@@ -49,9 +49,9 @@ class GA:
             new_population = []
             for _ in range(population_size // 2):
                 parent1, parent2 = self.select_parents(population)
-                child1, child2 = self.crossover(parent1, parent2)
-                self.mutate(child1, mutation_rate)
-                self.mutate(child2, mutation_rate)
+                child1, child2 = self.crossover(parent1, parent2, **kwargs)
+                self.mutate(child1, mutation_rate, **kwargs)
+                self.mutate(child2, mutation_rate, **kwargs)
                 new_population.append(child1)
                 new_population.append(child2)
 
