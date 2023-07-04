@@ -9,9 +9,6 @@ class GA:
     def calculate_fitness(self, **kwargs):
         pass
 
-    def mutate(self, **kwargs):
-        pass
-
     # Function to perform crossover between two parent bitstrings
     def crossover(self, parent1, parent2):
         crossover_point = random.randint(1, len(parent1) - 1)
