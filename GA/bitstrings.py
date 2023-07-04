@@ -23,4 +23,4 @@ class BitstringGA(GA):
 if __name__ == "__main__":
     # Run the genetic algorithm
     ga_runner = BitstringGA()
-    ga_runner.genetic_algorithm(GENERATIONS, POPULATION_SIZE, MUTATION_RATE, CROSSOVER_RATE, success_score=LENGTH, print_res=True, length=LENGTH)
+    ga_runner.select(GENERATIONS, POPULATION_SIZE, MUTATION_RATE, CROSSOVER_RATE, success_score=LENGTH, print_res=True, length=LENGTH)

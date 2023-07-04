@@ -44,4 +44,4 @@ if __name__ == "__main__":
     knapsack = generate_knapsack(10)
     print(knapsack)
     ga_runner = KnapsackGA(knapsack)
-    ga_runner.genetic_algorithm(GENERATIONS, POPULATION_SIZE, MUTATION_RATE, CROSSOVER_RATE, max_weight=MAX_WEIGHT, print_res=True)
+    ga_runner.select(GENERATIONS, POPULATION_SIZE, MUTATION_RATE, CROSSOVER_RATE, max_weight=MAX_WEIGHT, print_res=True)

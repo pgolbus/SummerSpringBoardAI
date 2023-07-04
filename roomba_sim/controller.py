@@ -24,7 +24,7 @@ MAX_NO_GAIN_STEPS = 3000
 
 
 @click.command()
-@click.option('--settings', default='settings.json', help='Path to settings file', type=str)
+@click.option('-s', '--settings', default='settings.json', help='Path to settings file', type=str)
 def main(settings):
     with open(settings) as fh:
         settings = json.load(fh)
