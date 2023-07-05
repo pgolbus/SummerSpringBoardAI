@@ -30,10 +30,18 @@ class KnapsackGA(GA):
 
     # Function to calculate the fitness of a bitstring
     def calculate_fitness(self, bitstring, max_weight=None, **kwargs):
-        pass
+        total_weight = 0
+        total_value = 0
+        for i in range(len(self.knapsack)):
+            if bitstring[i] == 1:
+                total_weight += self.knapsack[i][0]
+                total_value += self.knapsack[i][1]
+        if total_weight > max_weight:
+            total_value = 0  # Penalize solutions exceeding the weight limit
+        return total_value        
 
 if __name__ == "__main__":
     knapsack = generate_knapsack(10)
     print(knapsack)
     ga_runner = KnapsackGA(knapsack)
-    ga_runner.genetic_algorithm(GENERATIONS, POPULATION_SIZE, MUTATION_RATE, CROSSOVER_RATE, max_weight=MAX_WEIGHT, print_res=True)
+    ga_runner.select(GENERATIONS, POPULATION_SIZE, MUTATION_RATE, CROSSOVER_RATE, max_weight=MAX_WEIGHT, print_res=True)
