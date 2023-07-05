@@ -3,6 +3,10 @@ import random
 
 class GA:
 
+    def __init__(self, generations, population_size, **kwargs):
+        self.generations = generations
+        self.population_size = population_size
+
     def generate(self, **kwargs):
         pass
 
@@ -31,13 +35,13 @@ class GA:
                 bitstring[i] = random.choice([0, 1])
 
     # Genetic Algorithm
-    def select(self, generations, population_size, mutation_rate, crossover_rate, success_score=None, print_res=False, **kwargs):
+    def select(self, crossover_rate, mutation_rate, success_score=None, print_res=False, **kwargs):
         # Create initial population
-        population = [self.generate(**kwargs) for _ in range(population_size)]
+        population = [self.generate(**kwargs) for _ in range(self.population_size)]
         max_score = float("-inf")
         best_scores = []
 
-        for generation in range(generations):
+        for generation in range(self.generations):
             # Calculate fitness for each individual in the population
             fitness_scores = [self.calculate_fitness(individual, **kwargs) for individual in population]
 
@@ -62,7 +66,7 @@ class GA:
             new_population = []
             # we're going to select two individuals once per half the size the of the population
             # the strongest are most likely to breed or just move on to the next generation
-            for _ in range(population_size // 2):
+            for _ in range(self.population_size // 2):
                 parent1, parent2 = self.select_parents(population, fitness_scores)
                 child1, child2 = self.crossover(parent1, parent2, crossover_rate)
                 self.mutate(child1, mutation_rate)
