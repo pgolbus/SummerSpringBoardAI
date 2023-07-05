@@ -23,14 +23,7 @@ class InferenceEngine:
         # and the explanation. Then, add the then statement to the list
         # of facts and call the function again.
         # If it's neither, print sorry, I don't know what that game / genre.
-        # Then, add the fact to the list of facts and call the function again.
 
-        # Pop the first fact off the list and see if it's in the knowledge base.
-        # If it is, print it out. If not, see if it's a subset of the
-        # if statement for a rule. If it is, print out the then statement
-        # and the explanation. Then, add the then statement to the list
-        # of facts and call the function again.
-        # If it's neither, print sorry, I don't know what that game / genre.
         fact = facts.pop(0)
         found = False
         if fact in self.knowledge_base:
@@ -38,7 +31,7 @@ class InferenceEngine:
             found = True
         for rule in self.rules:
             # If the rule's if statement is a subset of the facts,
-            # I know know something else
+            # I now know something else
             if rule["if"] == fact:
                 print("Inferred: " + rule["then"] + " Because: " + rule["explanation"])
                 facts.append(rule["then"])
