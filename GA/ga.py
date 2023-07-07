@@ -10,7 +10,7 @@ class GA:
     def generate(self, **kwargs):
         pass
 
-    def calculate_fitness(self, **kwargs):
+    def calculate_fitness(self, bitstring, **kwargs):
         pass
 
     # Function to perform crossover between two parent bitstrings
