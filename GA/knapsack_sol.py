@@ -46,6 +46,7 @@ class KnapsackGA(GA):
             if bitstring[i] == 1:
                 total_weight += self.knapsack[i][0]
                 total_value += self.knapsack[i][1]
+        # remember that if it's too heavy, it cannot "survive"
         if total_weight > self.max_weight:
             total_value = 0  # Exclude solutions exceeding the weight limit
         return total_value

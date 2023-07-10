@@ -40,6 +40,7 @@ class KnapsackGA(GA):
 
     # Function to calculate the fitness of a bitstring
     def calculate_fitness(self, bitstring, **kwargs):
+        # remember that if it's too heavy, it cannot "survive"
         pass
 
 @click.command()
