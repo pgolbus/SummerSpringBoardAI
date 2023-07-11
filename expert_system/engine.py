@@ -18,11 +18,6 @@ class InferenceEngine:
 
     def infer(self, facts):
         # Get the first fact in the list
-        # If not, see if it's a subset of the
-        # if statement for a rule. If it is, print out the then statement
-        # and the explanation. Then, add the then statement to the list
-        # of facts and call the function again.
-
         fact = facts.pop(0)
 
         #see if it's a fact in the knowledge base.
