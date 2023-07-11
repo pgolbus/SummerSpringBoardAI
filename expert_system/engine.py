@@ -43,8 +43,8 @@ class InferenceEngine:
             return
         self.infer(facts)
 
-
-engine = InferenceEngine(knowledge_base, rules)
-engine.infer(["Diablo 2", "fighters"])
-print("\n")
-engine.infer(["Super Star Wars"])
+if __name__ == "__main__":
+    engine = InferenceEngine(knowledge_base, rules)
+    engine.infer(["Diablo 2", "fighters"])
+    print("\n")
+    engine.infer(["Super Star Wars"])
