@@ -17,31 +17,42 @@ class InferenceEngine:
         self.rules = rules
 
     def infer(self, facts):
-        # Get the first fact in the list and see if it's in the knowledge base.
-        # If it is, print it out. If not, see if it's a subset of the
+        # Get the first fact in the list
+        # If not, see if it's a subset of the
         # if statement for a rule. If it is, print out the then statement
         # and the explanation. Then, add the then statement to the list
         # of facts and call the function again.
-        # If it's neither, print sorry, I don't know what that game / genre.
 
         fact = facts.pop(0)
+
+        #see if it's a fact in the knowledge base.
         found = False
         if fact in self.knowledge_base:
+            # If it is, print it out
             print(f"{fact}: {self.knowledge_base[fact]}")
             found = True
+
+        # see if it's a rule's if statement.
         for rule in self.rules:
-            # If the rule's if statement is a subset of the facts,
-            # I now know something else
             if rule["if"] == fact:
-                print("Inferred: " + rule["then"] + " Because: " + rule["explanation"])
-                facts.append(rule["then"])
                 found = True
-        print("----------------------")
+                #if it is, print out the then statement and the explanation
+                print("Inferred: " + rule["then"] + " Because: " + rule["explanation"])
+
+                #add the then statement to the list of facts
+                facts.append(rule["then"])
+        print("\n----------------------\n")
+
+        # If it's neither, print sorry, I don't know what that game / genre.
         if not found:
             print("Sorry, I don't know what that game / genre.")
-        if len(facts) == 0:
-            return
-        self.infer(facts)
+
+        # if there are still facts left, call the function again
+        if len(facts) > 0:
+            self.infer(facts)
+
+        # if there are no more facts, we're done
+        return
 
 if __name__ == "__main__":
     engine = InferenceEngine(knowledge_base, rules)
