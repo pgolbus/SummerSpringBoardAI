@@ -41,7 +41,7 @@ def recursively_generate_directory_list(root_directory):
 root_directory = "."
 
 # List of directories or files to ignore during processing
-ignore_list = [".git", "__pycache__", ".ipynb_checkpoints", ".gitignore", "index.html"]
+ignore_list = [".git", "__pycache__", ".ipynb_checkpoints", ".gitignore", "index.html", "web_version"]
 
 # Generate the directory lists recursively
 recursively_generate_directory_list(root_directory)
