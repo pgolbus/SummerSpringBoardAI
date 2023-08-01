@@ -1,6 +1,7 @@
 # thank you chatgpt
 
 import os
+import re
 
 def generate_directory_list(directory):
     # Get the list of items in the directory, ignoring the ones in the ignore list
@@ -17,7 +18,7 @@ def generate_directory_list(directory):
             html += f'<li><a href="{item}/index.html">{item}</a></li>\n'
             generate_directory_list(item_path)  # Recursively generate the contents of the subdirectory
         else:  # If it's a file, display the file name with a link to the file
-            html += f'<li><a href="{item_path}">{item}</a></li>\n'
+            html += f'<li><a href="{item}">{item}</a></li>\n'
 
     html += '</ul>\n'
 
@@ -30,7 +31,7 @@ def recursively_generate_directory_list(root_directory):
     for root, dirs, files in os.walk(root_directory):
         # Exclude directories or files specified in the ignore list
         dirs[:] = [d for d in dirs if d not in ignore_list]
-        files[:] = [f for f in files if f not in ignore_list]
+        files[:] = [f for f in files if f not in ignore_list and f[-1] != "~"]
 
         # Generate the directory list for the current directory
         generate_directory_list(root)
